@@ -1,7 +1,7 @@
 # P3-Challenge-1
 
-- Tema Aplikasi: ...
-- CSS Framework: ...
+- Tema Aplikasi: Restaurant (cloning subway)
+- CSS Framework: Boostrap
 
 Struktur Folder:
 
