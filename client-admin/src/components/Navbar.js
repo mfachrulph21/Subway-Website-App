@@ -20,7 +20,7 @@ function NavbarComponent() {
     
 
   return (
-    <Navbar bg="white" expand="lg">
+    <Navbar bg="white mb-5" expand="lg">
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand href="#home">
