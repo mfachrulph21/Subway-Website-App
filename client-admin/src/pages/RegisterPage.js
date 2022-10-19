@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 
 function Register() {
   return (
-    <div >
+    <div className='div-register'>
     <Form className="w-50 p-3 m-auto rounded-4" >
         <h1 className='text-center mb-4' >Registration</h1>
       <Row className="mb-3">

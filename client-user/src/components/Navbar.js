@@ -32,16 +32,11 @@ function NavbarComponent() {
           </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          {/* <NavDropdown title="OUR MENU" id="basic-nav-dropdown">
+          <NavDropdown title="OUR MENU" id="basic-nav-dropdown">
             {categories.map((category, index) => {
                 return <NavDropdown.Item href="#">{category.name}</NavDropdown.Item>
             })} 
-            </NavDropdown> */}
-            <Nav.Link href="#home">DASHBOARD</Nav.Link>
-            <Nav.Link href="#link">CATEGORIES</Nav.Link>
-            <Nav.Link href="#link">REGISTER ADMIN</Nav.Link>
-            <Nav.Link href="#link">LOGOUT</Nav.Link>
-            
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -19,21 +19,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <LandingPage/>,
   }
-
-
-
 ]);
 
 
 function App() {
 
   return (
-    // <div className="App">
-    //   <NavbarComponent/>
-    //   <Register/>
-    //   <Login/>
-    //   <LandingPage/>
-    //  </div>
     <RouterProvider router={router} />
   );
 }

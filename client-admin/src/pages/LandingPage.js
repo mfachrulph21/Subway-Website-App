@@ -1,16 +1,14 @@
-import CarouselLandingPage from "../components/Carousel";
 import NavbarComponent from "../components/Navbar";
 import { useEffect, useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
+import Table from 'react-bootstrap/Table';
+import Button from "react-bootstrap/Button";
 
 function LandingPage() {
-  const navigate = useNavigate();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/items")
+    fetch("http://localhost:4000/items?_expand=author&_expand=category")
       .then((response) => {
         return response.json();
       })
@@ -22,31 +20,55 @@ function LandingPage() {
   return (
     <>
       <NavbarComponent />
-      <CarouselLandingPage />
-      <Row>
-        {items.map((item, index) => {
-          return (
-            <Col
-              className="col-4 text-center justify-content-center align-item-center"
-              onClick={() => {
-                navigate("/")
-              }}
-            >
-              <div className="card__box">
-                <div className="card__box__img">
-                    <img className="imgItems" src={item.imgUrl} />
-                </div>
-                <div className="card__box__title">
-                  <h4>{item.name.toUpperCase()}</h4>
-                </div>
-                <div className="card__box__price">
-                  <h5 className="itemPrice">{item.price}</h5>
-                </div>
-              </div>
-            </Col>
-          );
-        })}
-      </Row>
+      <div className="table-header">
+          
+        
+        <div className="item-product-title">
+          <h3>ITEM LIST</h3>
+        </div>
+        <div>
+          <Button className="new-item-button" variant="warning">New Item</Button>
+        </div>
+        </div>
+      <div className="table-div">
+        
+       
+      <Table striped>
+      <thead>
+        <tr>
+          <th>NO</th>
+          <th>NAME</th>
+          <th>CATEGORY</th>
+          <th>PRICE</th>
+          <th>CREATED BY</th>
+          <th>IMAGE</th>
+          <th>INGREDIENTS</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+      {items.map((item, index) => {
+        return (<tr>
+          <td>{index+1}</td>
+          <td>{item.name}</td>
+          <td>{item.category.name}</td>
+          <td>{item.price}</td>
+          <td>{item.author.username}</td>
+          <td><img className="imgTable"src={item.imgUrl}/></td>
+          <td>
+            <Button className="ingredients-button" variant="success">show ingredients</Button>
+            </td> 
+          <td>
+            <Button className="edit-button" variant="primary"  >Edit</Button>
+            <Button className="delete-button" variant="danger" >Delete</Button>
+          </td>
+        </tr>
+        )
+      })}
+      </tbody>
+    </Table>
+    </div>
+
     </>
   );
 }
