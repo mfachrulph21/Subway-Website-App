@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/Button";
 
-function LandingPage() {
-  const [items, setItems] = useState([]);
+function CategoriesPage() {
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/items?_expand=author&_expand=category")
+    fetch("http://localhost:4000/categories")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        setItems(data);
+        setCategories(data);
       });
   }, []);
 
@@ -24,10 +24,10 @@ function LandingPage() {
           
         
         <div className="item-product-title">
-          <h3>ITEM LIST</h3>
+          <h3>CATEGORY LIST</h3>
         </div>
         <div>
-          <Button className="new-item-button" variant="warning">New Item</Button>
+          <Button className="new-item-button" variant="warning">New Category</Button>
         </div>
         </div>
       <div className="table-div">
@@ -36,28 +36,19 @@ function LandingPage() {
         <tr>
           <th>NO</th>
           <th>NAME</th>
-          <th>CATEGORY</th>
-          <th>PRICE</th>
-          <th>CREATED BY</th>
-          <th>IMAGE</th>
-          <th>INGREDIENTS</th>
+          <th>CREATED AT</th>
+          <th>UPDATED AT</th>
           <th>ACTION</th>
         </tr>
       </thead>
       <tbody>
-      {items.map((item, index) => {
+      {categories.map((category, index) => {
         return (<tr>
           <td>{index+1}</td>
-          <td>{item.name}</td>
-          <td>{item.category.name}</td>
-          <td>{item.price}</td>
-          <td>{item.author.username}</td>
-          <td><img className="imgTable"src={item.imgUrl}/></td>
+          <td>{category.name}</td>
+          <td>{category.createdAt}</td>
+          <td>{category.updatedAt}</td>
           <td>
-            <Button className="ingredients-button" variant="success">show ingredients</Button>
-            </td> 
-          <td>
-            <Button className="edit-button" variant="primary"  >Edit</Button>
             <Button className="delete-button" variant="danger" >Delete</Button>
           </td>
         </tr>
@@ -66,9 +57,8 @@ function LandingPage() {
       </tbody>
     </Table>
     </div>
-
     </>
   );
 }
 
-export default LandingPage;
+export default CategoriesPage;

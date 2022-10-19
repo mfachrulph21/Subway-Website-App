@@ -7,7 +7,7 @@ function Register() {
   return (
     <div className='div-register'>
     <Form className="w-50 p-3 m-auto rounded-4" >
-        <h1 className='text-center mb-4' >Registration</h1>
+        <h1 className='text-center mb-4' >Register New Admin</h1>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Username</Form.Label>

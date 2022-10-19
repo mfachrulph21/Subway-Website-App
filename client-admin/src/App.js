@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; 
 import LandingPage from './pages/LandingPage';
 import {createBrowserRouter, RouterProvider } from 'react-router-dom'
+import CategoriesPage from './pages/CategoriesPage';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage/>,
+  },
+  {
+    path: "/categories",
+    element: <CategoriesPage/>,
   }
+
 ]);
 
 

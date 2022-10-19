@@ -31,23 +31,33 @@
     "categories": [
         {
             "id":1,
-            "name":"Breakfast"
+            "name":"Breakfast",
+            "createdAt":"2021-08-20",
+            "updatedAt":"2021-08-20"
         },
         {
             "id":2,
-            "name":"Salads"
+            "name":"Salads",
+            "createdAt":"2021-08-20",
+            "updatedAt":"2021-08-20"
         },
         {
             "id":3,
-            "name":"Wraps"
+            "name":"Wraps",
+            "createdAt":"2021-08-20",
+            "updatedAt":"2021-08-20"
         },
         {
             "id":4,
-            "name":"Sides"
+            "name":"Sides",
+            "createdAt":"2021-08-20",
+            "updatedAt":"2021-08-20"
         },
         {
             "id":5,
-            "name":"Drinks"
+            "name":"Drinks",
+            "createdAt":"2021-08-20",
+            "updatedAt":"2021-08-20"
         }
     ],
     "items": [
