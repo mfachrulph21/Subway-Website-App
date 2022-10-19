@@ -11,6 +11,39 @@
 }
 
 .imgItems {
-  width: 70%;
+  width: 60%;
   height: auto;
 }
+
+
+.card__box {
+  height: 400px;
+}
+
+.card__box:hover{
+  background-color: red;
+}
+
+.card__box:hover img{
+  transition: transform .5s;
+  transform: scale(1.1);
+  
+  
+}
+
+.card__box__title{
+  margin-top: 30px;
+}
+
+.card__box__img{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+
+.card__box__img img{
+  width: 220px;
+  height: 220px;
+}
+
