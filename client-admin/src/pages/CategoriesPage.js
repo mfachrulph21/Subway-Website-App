@@ -19,10 +19,7 @@ function CategoriesPage() {
 
   return (
     <>
-      <NavbarComponent />
       <div className="table-header">
-          
-        
         <div className="item-product-title">
           <h3>CATEGORY LIST</h3>
         </div>

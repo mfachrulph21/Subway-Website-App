@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import {useNavigate} from 'react-router-dom'
 
 
 function NavbarComponent() {
+    const navigate = useNavigate()
+
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -32,16 +34,10 @@ function NavbarComponent() {
           </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          {/* <NavDropdown title="OUR MENU" id="basic-nav-dropdown">
-            {categories.map((category, index) => {
-                return <NavDropdown.Item href="#">{category.name}</NavDropdown.Item>
-            })} 
-            </NavDropdown> */}
-            <Nav.Link href="#home">DASHBOARD</Nav.Link>
-            <Nav.Link href="#link">CATEGORIES</Nav.Link>
-            <Nav.Link href="#link">REGISTER ADMIN</Nav.Link>
-            <Nav.Link href="#link">LOGOUT</Nav.Link>
-            
+            <Nav.Link href="" onClick={()=> navigate('/')} >DASHBOARD</Nav.Link>
+            <Nav.Link href="" onClick={()=> navigate('/categories')} >CATEGORIES</Nav.Link>
+            <Nav.Link href="" onClick={()=> navigate('/register')}>REGISTER ADMIN</Nav.Link>
+            <Nav.Link href="" onClick={()=> navigate('/login')}>LOGOUT</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

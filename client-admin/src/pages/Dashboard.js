@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/Button";
 
-function LandingPage() {
+function Dashboard() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -19,10 +19,7 @@ function LandingPage() {
 
   return (
     <>
-      <NavbarComponent />
       <div className="table-header">
-          
-        
         <div className="item-product-title">
           <h3>ITEM LIST</h3>
         </div>
@@ -71,4 +68,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default Dashboard;
