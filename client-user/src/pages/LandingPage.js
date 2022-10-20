@@ -23,7 +23,7 @@ function LandingPage() {
     <>
       <NavbarComponent />
       <CarouselLandingPage />
-      <Row>
+      <Row style={{padding:50}}>
         {items.map((item, index) => {
           return (
             <Col
@@ -34,7 +34,7 @@ function LandingPage() {
             >
               <div className="card__box">
                 <div className="card__box__img">
-                    <img className="imgItems" src={item.imgUrl} />
+                    <img className="imgItems" src={item.imgUrl} alt="Items" />
                 </div>
                 <div className="card__box__title">
                   <h4>{item.name.toUpperCase()}</h4>

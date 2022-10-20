@@ -21,14 +21,12 @@
 }
 
 .card__box:hover{
-  background-color: red;
+  background-color: #fff9c4;
 }
 
 .card__box:hover img{
   transition: transform .5s;
   transform: scale(1.1);
-  
-  
 }
 
 .card__box__title{
@@ -45,5 +43,72 @@
 .card__box__img img{
   width: 220px;
   height: 220px;
+}
+
+.imgTable {
+  height: 50px;
+  width: 50px;
+}
+
+.table {
+  width: 75%;
+}
+
+.table-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.edit-button {
+    background-color: #81d4fa;
+}
+
+.delete-button {
+  background-color: #f44336;
+  margin-left: 20px;
+}
+
+.ingredients-button {
+  background-color: #81c784;
+}
+
+.table-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:auto;
+  margin-bottom: 20px;
+  width: 75%;
+
+}
+
+.new-item-button {
+  margin-right: 20px;
+  background-color: #fff176;
+}
+
+.item-product-title {
+  margin-left: 20px;
+}
+
+.div-register{
+  margin: auto;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.buttonCancelRegister {
+  /* background-color: #fff176; */
+  margin-left: 20px;
+}
+
+.div-login {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  height: 100vh;
 }
 

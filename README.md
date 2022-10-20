@@ -19,7 +19,7 @@ Target:
 - [ ] Mengirim Props baik berupa sebuah state atau function
 - [ ] Event Handling (onClick, onChange, onSubmit)
 - [ ] Conditional Rendering di dalam React
-- [ ] Looping List of Data di dalam React
+- [x] Looping List of Data di dalam React
 - [x] Lifecycle component menggunakan useEffect
 - [x] Membuat server (json-server)
 - [ ] Membuat react app untuk client-user (Styling)
