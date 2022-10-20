@@ -1,21 +1,40 @@
 import NavbarComponent from "../components/Navbar";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/Button";
+import { fetchItems } from '../store/ItemsActions/index'
 
 function Dashboard() {
-  const [items, setItems] = useState([]);
+  const dispatch = useDispatch()
+  // const [items, setItems] = useState([]);
+  const { items }= useSelector((state) => {
+    return state.itemReducer
+
+  })
+
+  // useEffect(() => {
+  //   fetch("http://localhost:4000/items?_expand=author&_expand=category")
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setItems(data);
+  //     });
+  // }, []);
 
   useEffect(() => {
-    fetch("http://localhost:4000/items?_expand=author&_expand=category")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setItems(data);
-      });
-  }, []);
+    dispatch(fetchItems())
+    .then((response) => {
+      if (response.error) {
+        throw response
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  })
 
   return (
     <>
@@ -43,7 +62,7 @@ function Dashboard() {
       </thead>
       <tbody>
       {items.map((item, index) => {
-        return (<tr>
+        return (<tr key={index}>
           <td>{index+1}</td>
           <td>{item.name}</td>
           <td>{item.category.name}</td>

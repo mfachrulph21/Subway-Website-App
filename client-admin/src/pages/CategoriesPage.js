@@ -46,6 +46,7 @@ function CategoriesPage() {
           <td>{category.createdAt}</td>
           <td>{category.updatedAt}</td>
           <td>
+            <Button className="edit-button" variant="primary"  >Edit</Button>
             <Button className="delete-button" variant="danger" >Delete</Button>
           </td>
         </tr>

@@ -8,19 +8,6 @@ import {useNavigate} from 'react-router-dom'
 function NavbarComponent() {
     const navigate = useNavigate()
 
-    const [categories, setCategories] = useState([])
-
-    useEffect(() => {
-        fetch("http://localhost:4000/categories")
-        .then((response) => {
-            return response.json()
-        })
-        .then((data) => {
-            setCategories(data)
-        })
-    }, [])
-    
-
   return (
     <Navbar bg="white mb-5" expand="lg">
       <Container>
