@@ -4,7 +4,7 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-export default function SelectIngredient({options, isMulti, onChangeFunction}) {
+export default function SelectIngredient({options, isMulti, onChangeFunction, name}) {
 
     const adjOptions = options.map((el) => {
       let keyName = {
@@ -22,7 +22,7 @@ export default function SelectIngredient({options, isMulti, onChangeFunction}) {
           isMulti={isMulti}
           options={adjOptions}
           onChange={onChangeFunction}
-          
+          name={name}
         />
     </>
   );

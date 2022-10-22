@@ -48,9 +48,10 @@ class itemController {
 
             let userId = req.user.id
 
-            const { name, description, price, imgUrl, categoryId, ingredients } = req.body
+            const { name, description, price, imgUrl, categoryId, ingredientsChoices } = req.body
+            console.log(req.body, 'ini reqbodynya dari client')
 
-            if(ingredients.lenght === 0) {
+            if(ingredientsChoices.lenght === 0) {
                 throw {name: 'ingredients is required'} //error 1
             }
 
@@ -73,7 +74,7 @@ class itemController {
                 userId
             }, { transaction: t })
 
-            await ItemIngredient.bulkCreate(ingredients, { transaction: t })
+            await ItemIngredient.bulkCreate(ingredientsChoices, { transaction: t })
 
             await t.commit();
             res.status(201).json(item)
@@ -119,6 +120,7 @@ class itemController {
 
             res.status(200).json({message: `Item ${editedItem.name} updated`})
         } catch (error) {
+            console.log(error)
             next(error)
         }
     }

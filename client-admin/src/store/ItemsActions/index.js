@@ -43,11 +43,38 @@ function fetchIngredients() {
     }
 }
 
+function addItems(payload) {
+    return async (dispatch) => {
+        try {
+            const response = fetch("http://localhost:3000/items", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    access_token: localStorage.getItem("access_token"),
+                },
+                body: JSON.stringify(payload)
+            })
+
+            if (!response.ok) {
+                throw await response.text()
+            }
+
+            const data = await response.json()
+            dispatch(fetchItems())
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export {
     fetchItems,
     itemsSuccessFetch,
     fetchIngredients,
-    ingredientsSuccessFetch
+    ingredientsSuccessFetch,
+    addItems
 }
 
 

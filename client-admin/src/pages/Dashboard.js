@@ -10,12 +10,24 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
+  const handleClose = () => {
+    setShow(false);
+    setFormType('')
+  }
+
+  const handleShow = (add) => {
+    setShow(true);
+    setFormType(add)
+  }
+
+  const [formType, setFormType] = useState("")
 
   const { items } = useSelector((state) => {
     return state.itemReducer;
   });
+
+  console.log(formType, '<<<<<<<')
 
   useEffect(() => {
     dispatch(fetchItems())
@@ -39,7 +51,7 @@ export default function Dashboard() {
           <Button
             className="new-item-button"
             variant="warning"
-            onClick={handleShow}
+            onClick={() => {handleShow('add')}}
           >
             New Item
           </Button>
@@ -48,7 +60,7 @@ export default function Dashboard() {
       <div className="table-div">
         <TabelItem items={items}/>
        
-        <ModalItem  handleClose={handleClose}  show={show} />
+        <ModalItem  handleClose={handleClose}  show={show} formType={formType} />
       </div>
     </>
   );
