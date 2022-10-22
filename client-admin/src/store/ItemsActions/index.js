@@ -1,4 +1,4 @@
-import { SET_ITEMS } from '../actionTypes/index'
+import { SET_ITEMS, SET_INGREDIENTS } from '../actionTypes/index'
 const baseUrl = 'http://localhost:4000'
 
 function itemsSuccessFetch(payload) {
@@ -24,9 +24,30 @@ function fetchItems() {
     }
 }
 
+function ingredientsSuccessFetch(payload) {
+    return {
+        type: SET_INGREDIENTS,
+        data: payload
+    }
+}   
+
+function fetchIngredients() {
+    return async (dispatch) => {
+        const response = await fetch(`${baseUrl}/ingredients`)
+
+        if (!response.ok) throw new Error('Something wrong happened!')
+
+        const ingredients = await response.json()
+
+        dispatch(ingredientsSuccessFetch(ingredients))
+    }
+}
+
 export {
     fetchItems,
-    itemsSuccessFetch
+    itemsSuccessFetch,
+    fetchIngredients,
+    ingredientsSuccessFetch
 }
 
 

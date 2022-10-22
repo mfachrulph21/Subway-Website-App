@@ -1,8 +1,8 @@
-import { SET_ITEMS } from '../actionTypes/index'
+import { SET_ITEMS, SET_INGREDIENTS } from '../actionTypes/index'
 
 const initialState = {
     items : [],
-    isLoading :
+    ingredients: []
 }
 
 function itemReducer(state = initialState, action) {
@@ -12,6 +12,13 @@ function itemReducer(state = initialState, action) {
                 ...state,
                 items: action.data
             }
+
+        case SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: action.data
+            }
+
         default: 
         return state;
     }
