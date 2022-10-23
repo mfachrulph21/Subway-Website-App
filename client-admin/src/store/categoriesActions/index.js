@@ -50,8 +50,25 @@ function addCategory(categoryInput) {
     }
 }
 
+function deleteCategory (id) {
+    return async (dispatch) => {
+        try {
+            await fetch(`${baseUrl}/categories/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                }
+            })
+            dispatch(fetchCategories())
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export {
     categoriesSuccessFetch,
     fetchCategories,
-    addCategory
+    addCategory,
+    deleteCategory
 }

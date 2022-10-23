@@ -1,5 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import Swal from 'sweetalert2'
+import { deleteCategory } from "../store/categoriesActions";
 
 export default function RowCategory(props) {
     const dispatch = useDispatch()
