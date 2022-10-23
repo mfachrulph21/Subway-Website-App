@@ -52,10 +52,7 @@ export default function RowItem(props) {
             <td>
               <img className="imgTable" src={item.imgUrl} />
             </td>
-            <td>
-              {/* <Button className="ingredients-button" variant="success">
-                    show ingredients
-                  </Button> */}
+            <td style={{textAlign:'left'}}>
               <ul>
                 {item.Ingredients?.map((ingredient, index) => {
                   return <li key={index}>{ingredient.name}</li>;

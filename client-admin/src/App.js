@@ -57,7 +57,6 @@ const router = createBrowserRouter([
 
 
 function App() {
-
   return (
     <ReduxProvider store={store}>
     <RouterProvider router={router} />
