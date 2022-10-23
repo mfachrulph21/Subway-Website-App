@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const itemingredient = require('./itemingredient');
 module.exports = (sequelize, DataTypes) => {
   class Ingredient extends Model {
     /**
@@ -11,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ingredient.belongsToMany(models.Item, {
+        through: "ItemIngredient",
+        foreignKey: "ingredientId"
+      })
     }
   }
   Ingredient.init({

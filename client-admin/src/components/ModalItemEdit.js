@@ -7,9 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import SelectIngredient from "./selectIngredient";
 
 
-export default function ModalItem(props) {
+export default function ModalItemEdit(props) {
 
 const {setFalse, show, formType, setType} = props
+
 const navigate = useNavigate()
 const dispatch = useDispatch()
 
@@ -22,7 +23,6 @@ const [itemForm, setItemForm] = useState({
   imgUrl: '',
   categoryId: '',
 })
-
 
 const { ingredients } = useSelector((state) => {
     return state.itemReducer;
@@ -81,12 +81,15 @@ if(!itemForm.name) {
   return;
 }
 
-  dispatch(addItems({ ...itemForm, ingredientsChoices })).then(()=>dispatch(fetchItems()))  ;
-  handleClose()
-  navigate(`/`)
-
+if (formType === "add") {
+  dispatch(addItems({ ...itemForm, ingredientsChoices }));
+} else if (formType === "edit") {
+//   dispatch(updateItems(itemForm));
 }
-
+  handleClose()
+  dispatch(fetchItems())
+  navigate(`/`)
+}
 
 useEffect(() => {
     dispatch(fetchCategories())
@@ -109,6 +112,8 @@ useEffect(() => {
     .catch((error) => {
       console.log(error)
     })
+
+    dispatch(itemDetail())
 }, [])
 
     return (

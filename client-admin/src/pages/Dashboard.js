@@ -26,6 +26,10 @@ export default function Dashboard() {
     setFormType("")
   }
 
+
+
+
+
   const { items } = useSelector((state) => {
     return state.itemReducer;
   });
@@ -77,7 +81,7 @@ export default function Dashboard() {
           <RowItem items={items} formType={formType}  setType={setType}  handleShow={handleShow}/>  
         </tbody>
       </Table>
-        <ModalItem   setFalse={setFalse} show={show} formType={formType} setType={setType}/>
+        <ModalItem setFalse={setFalse} show={show} formType={formType} setType={setType}/>
       </div>
     </>
   );

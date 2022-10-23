@@ -7,15 +7,14 @@ class itemController {
                 include : [
                     {model: User},
                     {model: Category},
-                    {model: ItemIngredient}
+                    // {model: ItemIngredient},
+                    {model: Ingredient}
                 ]
             })
 
             res.status(200).json(item)
-            console.log(item , 'INI FORMAT DATA ITEMNYA')
             
         } catch (error) {
-            console.log(error, 'INI EROR DI FETCH ALL ITEM')
             next(error) //error 1 (ISE)
             // error authen
         }
@@ -90,15 +89,16 @@ class itemController {
         try {
             let itemId = req.params.id
             let userId = req.user.id
-
+            
             const { name, description, price, imgUrl, categoryId} = req.body
+            
             
             if(!categoryId) {
                 throw {name: 'category is required'} //error 1
             }
 
             const category = await Category.findByPk(categoryId)
-
+            
             if(!category) {
                 throw {name:'category not found'} // error 2
             }
@@ -108,7 +108,7 @@ class itemController {
             if(!editedItem) {
                 throw {name: 'item not found'} // error 3
             }
-
+            
             let item = await Item.update({
                 name,
                 description,
@@ -117,12 +117,11 @@ class itemController {
                 categoryId,
                 userId
             },{
-                where: {id}
-            }, { transaction: t })
+                where: {id: itemId}
+            })
 
             res.status(200).json({message: `Item ${editedItem.name} updated`})
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }
@@ -166,7 +165,6 @@ class itemController {
 
     static async showIngredients (req, res, next) {
         try {
-             console.log('MASUK SHOW INGREDIENTS SERVER GAK')
             let ingredients = await Ingredient.findAll()
 
             res.status(200).json(ingredients)
@@ -176,6 +174,7 @@ class itemController {
             
         }
     }
+
 
 }
 

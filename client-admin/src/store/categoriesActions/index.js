@@ -32,8 +32,6 @@ function fetchCategories() {
 function addCategory(categoryInput) {
     return async (dispatch) => {
         try {
-
-            console.log(categoryInput, '<<<<<<<< INI DI ACTIONS ADD CATEGORY')
             await fetch(`${baseUrl}/categories` , {
                 method: 'POST',
                 headers: {

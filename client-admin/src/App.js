@@ -8,6 +8,7 @@ import Login from './pages/LoginPage';
 import CategoriesPage from './pages/CategoriesPage';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
+import EditItemForm from './pages/EditItemForm';
 
 const router = createBrowserRouter([
   
@@ -33,7 +34,12 @@ const router = createBrowserRouter([
       {
         path: "/categories",
         element: <CategoriesPage/>,
-      }
+      },
+      {
+        path: `/editItem/:id`,
+        element: <EditItemForm/>,
+      },
+
     ]
   },
   {

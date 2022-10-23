@@ -23,7 +23,7 @@ async function authentication (req, res, next) {
             email: user.email,
             role: user.role
         }
-
+        console.log('MASUK AUTHEN')
         next()
         
     } catch (error) {
