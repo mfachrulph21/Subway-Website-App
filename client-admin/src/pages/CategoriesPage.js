@@ -24,10 +24,8 @@ function CategoriesPage() {
     setError("");
   }
 
-  // const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(categoryInput, "<<<<<<<<");
 
   const { categories } = useSelector((state) => {
     return state.categoryReducer;

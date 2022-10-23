@@ -5,11 +5,8 @@ import { fetchProducts } from "../store/actions/itemActions"
 import { useNavigate } from 'react-router-dom'
 
 
-
 const Products = () => {
-    const navigate = useNavigate()
-    
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { items } = useSelector((state) => {
@@ -55,7 +52,6 @@ const Products = () => {
           );
         })}
       </Row>
-
       </Container>
     </>
   );

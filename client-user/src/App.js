@@ -9,10 +9,6 @@ import Products from './pages/Products';
 import DetailPage from './pages/DetailItemsPage';
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <LandingPage/>,
-  // },
   {
     element: <Layout />,
     children: [
@@ -30,9 +26,7 @@ const router = createBrowserRouter([
         }
     ]
 }
-
 ]);
-
 
 function App() {
   return (
