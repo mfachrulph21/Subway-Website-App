@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 function Login() {
   const navigate = useNavigate()
@@ -41,11 +42,15 @@ function Login() {
       }
       const data = await response.json()
 
+      Swal.fire('Welcome to Subwhy Admin Panel!~')
       localStorage.setItem('access_token', data.access_token)
       navigate('/')
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      const { message } = JSON.parse(error)
+      Swal.fire(`${message}`)
+
     }
   }
 
