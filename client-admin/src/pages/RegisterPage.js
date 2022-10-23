@@ -2,8 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import {useState} from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+
+const baseUrl = 'http://localhost:3000'
 
 function Register() {
   const navigate = useNavigate()
@@ -30,8 +33,32 @@ function Register() {
     setUser(newUser)
   }
 
-  function submitRegister(e) {
-    e.preventDefault()
+  async function submitRegister(e) {
+    try {
+      e.preventDefault()
+      
+      const response = await fetch(`${baseUrl}/users/register`, {
+        method: 'POST',
+        headers : {
+          'Content-Type': 'application/json',
+          access_token: localStorage.getItem(`access_token`)
+        },
+        body: JSON.stringify(user)
+      })
+
+      if (!response.ok) {
+        throw await response.text()
+      }
+      await response.json()
+      Swal.fire({
+        title: 'Successfully adding a new admin',
+        icon: `success`,
+        timer: 1500
+      })
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
 
   }
 

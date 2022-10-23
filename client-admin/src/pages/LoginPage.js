@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 function Login() {
+  const navigate = useNavigate()
 
   const [user, setUser] = useState({
     email: "",
@@ -24,11 +26,32 @@ function Login() {
     setUser(newUser)
   }
 
-  function submitLogin(e) {
-    e.preventDefault()
+  async function submitLogin(e) {
+    try {
+      e.preventDefault()
+      const response = await fetch('http://localhost:3000/users/login', {
+        method: 'POST',
+        headers : {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
+      })
+      
+      if(!response.ok) {
+        throw await response.text() 
+      }
+      const data = await response.json()
 
-    //
+      Swal.fire('Welcome to Subwhy Admin Panel!~')
+      localStorage.setItem('access_token', data.access_token)
+      navigate('/')
 
+    } catch (error) {
+      console.log(error);
+      const { message } = JSON.parse(error)
+      Swal.fire(`${message}`)
+
+    }
   }
 
   return (
@@ -44,12 +67,12 @@ function Login() {
       <Row className="mb-3 mt-3">
         <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Email" name="email" value={user.email} onChange={changeHandler} />
+          <Form.Control type="email" placeholder="Email" name="email" value={user.email} onChange={changeHandler} required />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" name="password" value={user.password}  onChange={changeHandler}/>
+          <Form.Control type="password" placeholder="Password" name="password" value={user.password}  onChange={changeHandler} required/>
         </Form.Group>
       </Row>
       <Button className='buttonSubmit'variant="success" type="submit">

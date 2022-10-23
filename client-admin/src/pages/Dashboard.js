@@ -1,20 +1,50 @@
-import NavbarComponent from "../components/Navbar";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Table from 'react-bootstrap/Table';
-import Button from "react-bootstrap/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Table } from "react-bootstrap";
+import { fetchItems} from "../store/ItemsActions/index";
+import ModalItem from "../components/ModalItem";
+import RowItem from "../components/RowItem";
 
-function Dashboard() {
-  const [items, setItems] = useState([]);
+
+export default function Dashboard() {
+  const dispatch = useDispatch();
+
+  const [show, setShow] = useState(false);
+  const [formType, setFormType] = useState("")
+
+
+  const setFalse = () => {
+    setShow(false)
+  }
+
+  const handleShow = (add) => {
+    setShow(true);
+    setFormType(add)
+  }
+
+  const setType = () => {
+    setFormType("")
+  }
+
+
+
+
+
+  const { items } = useSelector((state) => {
+    return state.itemReducer;
+  });
+
 
   useEffect(() => {
-    fetch("http://localhost:4000/items?_expand=author&_expand=category")
+    dispatch(fetchItems())
       .then((response) => {
-        return response.json();
+        if (response.error) {
+          throw response;
+        }
       })
-      .then((data) => {
-        setItems(data);
-      });
+      .catch((error) => {
+        console.log(error);
+      })
   }, []);
 
   return (
@@ -24,48 +54,37 @@ function Dashboard() {
           <h3>ITEM LIST</h3>
         </div>
         <div>
-          <Button className="new-item-button" variant="warning">New Item</Button>
+          <Button
+            className="new-item-button"
+            variant="warning"
+            onClick={() => {handleShow('add')}}
+          >
+            New Item
+          </Button>
         </div>
-        </div>
+      </div>
       <div className="table-div">
-      <Table striped>
-      <thead>
-        <tr>
-          <th>NO</th>
-          <th>NAME</th>
-          <th>CATEGORY</th>
-          <th>PRICE</th>
-          <th>CREATED BY</th>
-          <th>IMAGE</th>
-          <th>INGREDIENTS</th>
-          <th>ACTION</th>
-        </tr>
-      </thead>
-      <tbody>
-      {items.map((item, index) => {
-        return (<tr>
-          <td>{index+1}</td>
-          <td>{item.name}</td>
-          <td>{item.category.name}</td>
-          <td>{item.price}</td>
-          <td>{item.author.username}</td>
-          <td><img className="imgTable"src={item.imgUrl}/></td>
-          <td>
-            <Button className="ingredients-button" variant="success">show ingredients</Button>
-            </td> 
-          <td>
-            <Button className="edit-button" variant="primary"  >Edit</Button>
-            <Button className="delete-button" variant="danger" >Delete</Button>
-          </td>
-        </tr>
-        )
-      })}
-      </tbody>
-    </Table>
-    </div>
-
+        <Table striped>
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>NAME</th>
+            <th>CATEGORY</th>
+            <th>PRICE</th>
+            <th>CREATED BY</th>
+            <th>IMAGE</th>
+            <th>INGREDIENTS</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <RowItem items={items} formType={formType}  setType={setType}  handleShow={handleShow}/>  
+        </tbody>
+      </Table>
+        <ModalItem setFalse={setFalse} show={show} formType={formType} setType={setType}/>
+      </div>
     </>
   );
 }
 
-export default Dashboard;
+// handleClose={handleClose} //84

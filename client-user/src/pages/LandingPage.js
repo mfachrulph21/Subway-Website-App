@@ -1,29 +1,11 @@
 import CarouselLandingPage from "../components/Carousel";
-import NavbarComponent from "../components/Navbar";
-import { useEffect, useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
-  const navigate = useNavigate();
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:4000/items")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setItems(data);
-      });
-  }, []);
-
   return (
     <>
-      <NavbarComponent />
+      {/* <NavbarComponent /> */}
       <CarouselLandingPage />
-      <Row style={{padding:50}}>
+      {/* <Row style={{padding:50}}>
         {items.map((item, index) => {
           return (
             <Col
@@ -46,7 +28,7 @@ function LandingPage() {
             </Col>
           );
         })}
-      </Row>
+      </Row> */}
     </>
   );
 }
