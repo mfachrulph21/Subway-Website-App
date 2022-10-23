@@ -7,7 +7,6 @@ class itemController {
                 include : [
                     {model: User},
                     {model: Category},
-                    // {model: ItemIngredient},
                     {model: Ingredient}
                 ]
             })
@@ -15,8 +14,7 @@ class itemController {
             res.status(200).json(item)
             
         } catch (error) {
-            next(error) //error 1 (ISE)
-            // error authen
+            next(error) 
         }
     }
 
@@ -32,12 +30,15 @@ class itemController {
             })
 
             if (!item) {
-                throw {name: 'Item not found'}  //error 1
+                throw {
+                    code : 404,
+                    msg : 'Item not found'
+                }
             }
 
             res.status(200).json(item)
         } catch (error) {
-            next(error) //error 2 (authen)   
+            next(error) 
         }
     }
 
@@ -48,20 +49,28 @@ class itemController {
             let userId = req.user.id
 
             const { name, description, price, imgUrl, categoryId, ingredientsChoices } = req.body
-            console.log(req.body, 'ini reqbodynya dari client')
 
             if(ingredientsChoices.lenght === 0) {
-                throw {name: 'ingredients is required'} //error 1
+                throw {
+                    code: 400,
+                    msg : 'ingredients is required'
+                }
             }
 
             if(!categoryId) {
-                throw {name: 'category is required'} //error 2
+                throw {
+                    code: 400,
+                    msg : 'category is required'
+                }
             }
 
             const category = await Category.findByPk(categoryId)
 
             if(!category) {
-                throw {name:'category not found'} // error 3
+                throw {
+                    code: 404,
+                    msg : 'category not found'
+                }
             }
 
             let item = await Item.create({
@@ -92,19 +101,28 @@ class itemController {
             
             
             if(!categoryId) {
-                throw {name: 'category is required'} //error 1
+                throw {
+                    code : 400,
+                    msg: 'category is required'
+                }
             }
 
             const category = await Category.findByPk(categoryId)
             
             if(!category) {
-                throw {name:'category not found'} // error 2
+                throw {
+                    code: 404,
+                    msg: 'category not found'
+                }
             }
 
             let editedItem = await Item.findByPk(itemId)
 
             if(!editedItem) {
-                throw {name: 'item not found'} // error 3
+                throw {
+                    code: 404,
+                    msg: 'item not found'
+                }
             }
             
             let item = await Item.update({
@@ -131,7 +149,10 @@ class itemController {
             let item = await Item.findByPk(itemId)
 
             if(!item) {
-                throw {name: 'item not found'} //error 1
+                throw {
+                    code: 404,
+                    msg: 'item not found'
+                }
             }
 
             await Item.destroy({
@@ -156,8 +177,10 @@ class itemController {
                 }
             })
             
+            res.status(200).json(category)
         } catch (error) {
             console.log(error)
+            next(error)
         }
     }
 
@@ -166,14 +189,10 @@ class itemController {
             let ingredients = await Ingredient.findAll()
 
             res.status(200).json(ingredients)
-            
         } catch (error) {
             next(error)
-            
         }
     }
-
-
 }
 
 module.exports = itemController
