@@ -7,10 +7,8 @@ class categoryController {
         try {
             
             const categories = await Category.findAll();
-            console.log('MASUK SERVER FETCH CATEGORY')
             res.status(200).json(categories)
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }
@@ -19,8 +17,6 @@ class categoryController {
         try {
 
             const { name } = req.body
-            console.log(req.body, '<<<<<<<<<< MASUK KE ADD CATEGORY DI SINI ')
-
             
             const category = await Category.create({
                 name
@@ -29,7 +25,6 @@ class categoryController {
             res.status(201).json({message:'New category added'})
             
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }
@@ -41,13 +36,15 @@ class categoryController {
             const category = await Category.findByPk(id)
 
             if(!category) {
-                throw {name: 'Category not found'}
+                throw {
+                    code:404,
+                    msg: 'Category not found'
+                }
             }
 
             res.status(200).json(category)
             
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }
@@ -59,7 +56,10 @@ class categoryController {
             const editedCategory = await Category.findByPk(id)
 
             if(!editedCategory) {
-                throw {name: 'Category not found'} //error 1
+                throw {
+                    code: 404,
+                    msg: 'Category not found'
+                }
             }
 
             const category = await Category.update({
@@ -71,7 +71,6 @@ class categoryController {
             res.status(201).json({message: 'Success edit category'})
 
         } catch (error) {
-            console.log(error)
             next(error)
             
         }
@@ -83,7 +82,10 @@ class categoryController {
             const findCategory = await Category.findByPk(id);
 
             if(!findCategory) {
-                throw {name: 'Category not found'}
+                throw {
+                    code: 404,
+                    msg : 'Category not found'
+                }
             }
 
             await Category.destroy({
@@ -93,7 +95,6 @@ class categoryController {
             res.status(200).json({message: 'Delete category success'})
 
         } catch (error) {
-            console.log(error)
             next(error)
         }
     }

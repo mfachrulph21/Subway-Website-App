@@ -6,7 +6,10 @@ async function authentication (req, res, next) {
         let access_token = req.headers.access_token
 
         if(!access_token) {
-            throw {name: 'User not login yet'} //error 1
+            throw {
+                code:401,
+                msg: 'User not login yet'
+            }
         }
 
         let payload = verifyPayload(access_token)
@@ -14,7 +17,10 @@ async function authentication (req, res, next) {
         let user = await User.findByPk(payload.id)
 
         if(!user) {
-            throw {name: 'This account not registered'} //error 2
+            throw {
+                code: 401,
+                msg: 'Invalid Token'
+            }
         }
 
         req.user = {
@@ -23,9 +29,7 @@ async function authentication (req, res, next) {
             email: user.email,
             role: user.role
         }
-        console.log('MASUK AUTHEN')
         next()
-        
     } catch (error) {
         next(error)
     }

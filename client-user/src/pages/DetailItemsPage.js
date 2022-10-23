@@ -19,9 +19,6 @@ function DetailPage() {
     }).format(number);
   }
 
-  console.log(detail, '<<<<<<<<<<<< INI DATA DETAILNYA')
-
-
   useEffect(() => {
     dispatch(fetchDetail(id))
   }, []);
