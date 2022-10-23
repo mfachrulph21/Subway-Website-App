@@ -1,6 +1,7 @@
 import { FETCH_ITEMS, FETCH_ITEMS_DETAILS, FETCH_LOADING} from '../actionTypes/itemActionsType'
 
-const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://localhost:3000";
+const baseUrl= 'https://subwhy-server.herokuapp.com'
 
 export function fetchProductSuccess(data) {
     return {

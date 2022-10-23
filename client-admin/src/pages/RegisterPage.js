@@ -6,7 +6,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
+const baseUrl= 'https://subwhy-server.herokuapp.com'
 
 function Register() {
   const navigate = useNavigate()
