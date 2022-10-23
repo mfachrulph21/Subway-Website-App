@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
+const baseUrl= 'https://subwhy-server.herokuapp.com'
+
 function Login() {
   const navigate = useNavigate()
 
@@ -29,7 +31,7 @@ function Login() {
   async function submitLogin(e) {
     try {
       e.preventDefault()
-      const response = await fetch('http://localhost:3000/users/login', {
+      const response = await fetch(`${baseUrl}/users/login`, {
         method: 'POST',
         headers : {
           'Content-Type': 'application/json',

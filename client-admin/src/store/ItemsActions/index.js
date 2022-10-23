@@ -3,7 +3,8 @@ import {
     SET_INGREDIENTS,
     SUCCESS_FETCH_DETAIL,
   } from "../actionTypes/index";
-  const baseUrl = "http://localhost:3000";
+  // const baseUrl = "http://localhost:3000";
+  const baseUrl= 'https://subwhy-server.herokuapp.com'
   
   function itemsSuccessFetch(payload) {
     return {
@@ -60,7 +61,7 @@ import {
   function addItems(payload) {
     return async (dispatch) => {
       try {
-        const response = await fetch("http://localhost:3000/items", {
+        const response = await fetch(`${baseUrl}/items`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +71,6 @@ import {
           body: JSON.stringify(payload),
         });
         
-        console.log(response,' RESPONSENYA APA')
         if (!response.ok) {
             throw await response.text();
         }
@@ -118,9 +118,6 @@ import {
   function editItem(payload, id) {
     return async (dispatch) => {
       try {
-        console.log("masuk di action");
-        console.log(id, "ini idnya");
-        console.log(payload, "<<<< payload di action");
         const response = await fetch(`${baseUrl}/items/${id}`, {
           method: "PUT",
           headers: {
@@ -138,9 +135,7 @@ import {
         const item = await response.json();
         dispatch(fetchItems());
       } catch (error) {
-        // const message = JSON.parse(error)
-        // console.log(message, 'INI ERRORNYA <<<<<<<<<<')
-        console.log(error, "<<< INI ERORNYA");
+        console.log(error);
       }
     };
   }

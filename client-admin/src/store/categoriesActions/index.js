@@ -1,5 +1,6 @@
 import { SET_CATEGORIES } from '../actionTypes/index'
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
+const baseUrl= 'https://subwhy-server.herokuapp.com'
 
 function categoriesSuccessFetch(payload) {
     return {
