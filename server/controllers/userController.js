@@ -7,6 +7,8 @@ class userController {
     static async login (req, res, next) {
         try {
             const {email, password} = req.body
+            console.log('MASUK LOGIN GAK PLEASE')
+            console.log(req.body, '<<<<<<<<< INI REQ BODYNYA')
 
             if(!email) {
                 throw {name: 'Email is required'} //error 1
@@ -36,6 +38,7 @@ class userController {
 
             res.status(200).json({access_token})
         } catch (error) {
+            console.log(error)
             next(error)
         }
     }

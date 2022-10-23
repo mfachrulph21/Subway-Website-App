@@ -1,5 +1,5 @@
 import { SET_CATEGORIES } from '../actionTypes/index'
-const baseUrl = 'http://localhost:4000'
+const baseUrl = 'http://localhost:3000'
 
 function categoriesSuccessFetch(payload) {
     return {
@@ -11,7 +11,12 @@ function categoriesSuccessFetch(payload) {
 function fetchCategories() {
     return async (dispatch) => {
         try {
-            const response = await fetch(`${baseUrl}/categories`)
+            const response = await fetch(`${baseUrl}/categories`, {
+                method: 'GET',
+                headers: {
+                    access_token: localStorage.getItem("access_token")
+                }
+            })
 
             if (!response.ok) throw new Error('Something wrong happened!')
             const categories = await response.json()
@@ -24,7 +29,29 @@ function fetchCategories() {
     }
 }
 
+function addCategory(categoryInput) {
+    return async (dispatch) => {
+        try {
+
+            console.log(categoryInput, '<<<<<<<< INI DI ACTIONS ADD CATEGORY')
+            await fetch(`${baseUrl}/categories` , {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    access_token: localStorage.getItem("access_token")
+                },
+                body : JSON.stringify(categoryInput)
+            })
+            dispatch(fetchCategories())
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export {
     categoriesSuccessFetch,
-    fetchCategories
+    fetchCategories,
+    addCategory
 }

@@ -1,6 +1,8 @@
 import { Button } from "react-bootstrap";
 
-export default function RowItem({items}) {
+export default function RowItem(props) {
+
+  const {items, formType, setType, handleShow} = props
     return (
         <>
         {items.map((item, index) => {
@@ -8,9 +10,9 @@ export default function RowItem({items}) {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
-                <td>{item.category.name}</td>
+                <td>{item.Category.name}</td>
                 <td>{item.price}</td>
-                <td>{item.author.username}</td>
+                <td>{item.User.username}</td>
                 <td>
                   <img className="imgTable" src={item.imgUrl} />
                 </td>
@@ -20,7 +22,7 @@ export default function RowItem({items}) {
                   </Button>
                 </td>
                 <td>
-                  <Button className="edit-button" variant="primary">
+                  <Button className="edit-button" variant="primary" onClick={() => {handleShow('edit')}} >
                     Edit
                   </Button>
                   <Button className="delete-button" variant="danger">

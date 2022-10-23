@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { fetchItems} from "../store/ItemsActions/index";
 import ModalItem from "../components/ModalItem";
-import TabelItem from "../components/TabelItem";
+import RowItem from "../components/RowItem";
 
 
 export default function Dashboard() {
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
-  
-  const handleClose = () => {
-    setShow(false);
-    setFormType('')
+  const [formType, setFormType] = useState("")
+
+
+  const setFalse = () => {
+    setShow(false)
   }
 
   const handleShow = (add) => {
@@ -21,13 +22,14 @@ export default function Dashboard() {
     setFormType(add)
   }
 
-  const [formType, setFormType] = useState("")
+  const setType = () => {
+    setFormType("")
+  }
 
   const { items } = useSelector((state) => {
     return state.itemReducer;
   });
 
-  console.log(formType, '<<<<<<<')
 
   useEffect(() => {
     dispatch(fetchItems())
@@ -58,11 +60,27 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="table-div">
-        <TabelItem items={items}/>
-       
-        <ModalItem  handleClose={handleClose}  show={show} formType={formType} />
+        <Table striped>
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>NAME</th>
+            <th>CATEGORY</th>
+            <th>PRICE</th>
+            <th>CREATED BY</th>
+            <th>IMAGE</th>
+            <th>INGREDIENTS</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <RowItem items={items} formType={formType}  setType={setType}  handleShow={handleShow}/>  
+        </tbody>
+      </Table>
+        <ModalItem   setFalse={setFalse} show={show} formType={formType} setType={setType}/>
       </div>
     </>
   );
 }
 
+// handleClose={handleClose} //84

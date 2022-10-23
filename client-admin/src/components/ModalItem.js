@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Button, Form, Modal, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../store/categoriesActions";
-import { fetchIngredients, addItems } from "../store/ItemsActions";
+import { fetchIngredients, addItems, fetchItems} from "../store/ItemsActions";
 import { useNavigate } from 'react-router-dom';
 import SelectIngredient from "./selectIngredient";
 
 
-export default function ModalItem({handleClose, show, formType, props}) {
+export default function ModalItem(props) {
+
+const {setFalse, show, formType, setType} = props
 const navigate = useNavigate()
 const dispatch = useDispatch()
 
@@ -21,8 +23,6 @@ const [itemForm, setItemForm] = useState({
   categoryId: '',
 })
 
-// console.log(ingredientsChoices, '<<<<<<<< INI CHOICES INGREDIETNS')
-// console.log(itemForm, '<<<<<<< DATA FORMNYA')
 
 const { ingredients } = useSelector((state) => {
     return state.itemReducer;
@@ -41,6 +41,20 @@ function changeHandler(e) {
 
   newItem[name] = value 
   setItemForm(newItem)
+}
+
+function handleClose(){
+  setItemForm({
+    name: '',
+    description: '',
+    price: '',
+    imgUrl: '',
+    categoryId: '',
+  })
+  setFalse()
+  setError("")
+  setType()
+  setIngredientsChoices([{}])
 }
 
 
@@ -73,6 +87,7 @@ if (formType === "add") {
   // dispatch(updateItems(itemForm));
 }
   handleClose()
+  dispatch(fetchItems())
   navigate(`/`)
 
 }
@@ -98,6 +113,7 @@ useEffect(() => {
     .catch((error) => {
       console.log(error)
     })
+
 }, [])
 
     return (
@@ -132,7 +148,7 @@ useEffect(() => {
                 placeholder="Enter item description"
               >
                 <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={2} name="description" value={itemForm.description} onChange={changeHandler}/>
+                <Form.Control as="textarea" placeholder="Enter item description" rows={2} name="description" value={itemForm.description} onChange={changeHandler}/>
               </Form.Group>
             
             <Form.Group className="mb-1" controlId="exampleForm.ControlInput2">
@@ -177,10 +193,10 @@ useEffect(() => {
           
                 <SelectIngredient options={ingredients} isMulti={true} onChangeFunction={(choice) => setIngredientsChoices(choice)} name="ingredientId" /> 
               </Form.Group>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button className="mt-2" variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" variant="primary">
+            <Button className="ms-2 mt-2" type="submit" variant="primary">
               Submit
             </Button>
               </Form> 

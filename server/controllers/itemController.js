@@ -1,4 +1,4 @@
-const { Item, User, Category, ItemIngredient, sequelize} = require('../models/index')
+const { Item, User, Category, ItemIngredient, Ingredient, sequelize} = require('../models/index')
 class itemController {
 
     static async showItems (req, res, next) {
@@ -12,8 +12,10 @@ class itemController {
             })
 
             res.status(200).json(item)
+            console.log(item , 'INI FORMAT DATA ITEMNYA')
             
         } catch (error) {
+            console.log(error, 'INI EROR DI FETCH ALL ITEM')
             next(error) //error 1 (ISE)
             // error authen
         }
@@ -158,6 +160,19 @@ class itemController {
             })
             
         } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async showIngredients (req, res, next) {
+        try {
+             console.log('MASUK SHOW INGREDIENTS SERVER GAK')
+            let ingredients = await Ingredient.findAll()
+
+            res.status(200).json(ingredients)
+            
+        } catch (error) {
+            next(error)
             
         }
     }
